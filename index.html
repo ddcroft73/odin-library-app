@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-library.css">
+   
+    <title>Simple Library</title>
+</head>
+
+<body>
+    <!--
+      Simple HTML Skeleton. App  caters to mobile but will respond to work equally well on bigger devices
+         
+    -->
+
+    <div class="header-cont">
+        <div class="header-left">            
+            <div class="header-left-inside1"><img src="./images/book.png" width="25"></div>
+            <div class="header-left-inside2">Library App </div>
+        </div>
+
+        <div class="header-right">
+            <div class="header-right-inside">
+                <div class="reset">Reset</div>
+                <!--<label class="switch">
+                   <input type="checkbox" id="theme">
+                   <span class="slider round"></span>
+                </label>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sample card to design the interface for the book info
+        I will be adding thes dynamically via JS and adding inline CSS-->
+   
+       
+   <!-- <div class="nadd-card" data-index="use book title">
+            <div class="title">Long Book Title</div>
+            <div class="author">By:  Long Author Name</div>            
+            <div class="rule"></div>            
+            <div class="pages">Total Pages: <span class="special">123</span></div>            
+            <div class="genre">Genre: <span class="special">Fantasy</span></div>
+
+            <div class="card-footer">
+                <div class="card-footer-book-read">                    
+                    <label class="switch">
+                      <input type="checkbox" id="read">
+                      <span class="slider round"></span>                        
+                    </label>
+                    <div class="status">Not Read</div> 
+                </div>
+
+                <div class="card-footer-delete" id="delete">
+                     <img src="./images/delete.png" width="20">
+                </div>
+            </div>
+
+        </div>
+    -->
+
+        <div class="add-card">
+            <div class="new-book" id="add-btn"></div>
+        </div>     
+
+    </div>
+
+    <div class="footer"> &COPY; <a href = "mailto: gen.disarray73@outlook.com">general_disarray</a> 2022</div>
+    
+<!-- MODAL HTML-->
+ <div id="add-modal" class="modal">
+    <!-- Modal content -->
+        <div class="modal-content-container">  
+                      
+            <div class="modal-content">
+                <div class="close-container">                 
+                   <div class="modal-header"><h3>Add New Book:</h3></div>          
+                   <span class="close">&times;</span>
+                </div>    
+                <div class="book-add-form">
+
+                    <form id="new-book">
+                        <label for="title">Book Title:</label>
+                        <input type="text" 
+                                id="title" 
+                                name="title" 
+                                placeholder="Book Title" 
+                                >
+                        <label for="author">Author:</label>
+                        <input type="text" 
+                               id="author" 
+                               name="author" 
+                               placeholder="Book Author"
+                               >
+                        <label for="genre-selector">Select Genre:</label>
+                        <div class="container-slider-select">
+                            <div class="genre-selector">
+                                <select id="book-genre" name="read" value="Select">
+                                    <option value="Non-Fiction">Non-fiction.</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Sci-Fi">Science-Fiction</option>
+                                    <option value="Love Story">Love Story</option>
+                                    <option value="Crime">Crime</option>
+                                </select>
+                            </div>
+                            <div class="read-slider">
+                                <label class="switch">
+                                    <input type="checkbox" id="modal-read">
+                                    <span class="slider round"></span>
+                                </label>
+                                <div id="modal-status" class="modal-status">Not Read</div>
+                            </div> 
+                        </div>
+
+                        <div class="container-num-pages">
+                            <div class="num-pages">Total Pages:</div>
+                            <input  type="number" min="1" id="num-pages" name="num-pages" value=1>
+                        </div>
+
+                        <div class="line"></div>
+                        <div class="container-buttons">
+                                <input type="button" id="reset" value="Reset Form">
+                                <input type="button" id="save" value="Save Book">
+                        </div>  
+                        
+                        <!--
+                        
+                        <input type="button" id="save" value="Save Book">-->
+                    </form>
+                </div>
+            </div>
+
+
+        </div>  
+  </div> 
+
+<!-- JQuery for events and DOM Manipulation-->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- Application logic script-->   
+<script src="./scripts/logic.js"></script>
+<!-- Script that deals with DOM manipulation-->
+<script src="./scripts/DOM.js"></script>
+
+</body>
+</html>

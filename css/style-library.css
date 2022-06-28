@@ -1,0 +1,505 @@
+
+* {
+    border: 0px solid gray;    
+    box-sizing: border-box;
+}
+h1, h2, h3 {
+    margin : 0;
+    padding: 0;
+}
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+/* dark mode sort of, is how it starts, light mode will only shift to slightly brighter shades 
+of greem and white vs army green and gray   */
+body {
+    margin: 0;
+    background-color: rgb(66, 72, 57);
+
+    position: relative;
+    height: 100%;
+} 
+
+.header-cont {
+    display:flex;
+    align-items: center;
+    height: 45px;
+    background-color: rgb(87, 101, 65);
+    box-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0px;
+}
+
+    .header-left, .header-right {
+        display: flex;
+        flex: 1;
+    }
+    .header-left-inside2 {
+        font-size: 20px;
+        font-weight: 100;
+    }
+    .header-left-inside1 {
+        padding-top: 3px;
+    }
+    .header-left {
+        justify-content: flex-start;
+        gap: 5px;
+        margin-left: 15px;
+        color: rgb(201, 199, 193);
+    }
+    .header-right {
+        justify-content: flex-end;
+        gap: 10px;
+        margin-right: 30px;
+    }
+    .header-right-inside {              
+        padding-top: 5px;
+    }
+        .reset {
+            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: 100;
+            border: 1px solid #a3f321;
+            padding: 0px 20px;
+            border-radius: 5px;
+            background-color: rgb(66, 72, 57);
+            color: rgb(201, 199, 193);    
+        }
+        .reset:hover {
+            background-color: gray;
+
+        }
+
+/* If the screen is bigger than a tablet, dont' center the flex items*/    
+@media screen and (min-width: 480px) {
+        .main-container {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            padding-top: 50px;
+            gap: 25px;
+            height: 100%;
+            margin-left: 50px;
+        }
+}
+/* if the screen is mobile, center the flex items*/
+@media screen and (max-width: 480px) {
+        .main-container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            padding-top: 50px;
+            gap: 15px;
+            height: 100%;
+        }    
+}
+
+    .add-card {
+        border: 1px dotted gray;
+        flex: 1 200px;
+        height: 200px;
+        max-width: 200px;
+        width: 100%;
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px; 
+        background-color: rgb(69, 74, 62);
+    }
+
+    .add-card:active {
+         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+       
+    }
+
+    .new-book::before {
+        content: "+";
+        text-shadow: 3px 3px 4px  rgba(0, 0, 0, 0.2);
+
+        height:200px;
+        width:200px;
+        font-size:120px;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+        font-weight:bold;
+        font-family:courier;
+        color:rgb(87, 101, 65);
+      }
+
+.footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background-color: rgb(87, 101, 65);
+    text-align: center;
+    border-top: 1px solid #272c28;
+    color: aliceblue;    
+}
+
+a {
+    color:rgb(164, 172, 180);
+    text-decoration: none;
+}
+
+
+ /* The switch - the box around the slider */
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 10px;
+  }
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 1px;
+    left: 0px;
+    right: 5px;
+    bottom: 0px;
+    background-color: rgb(66, 72, 57); /* rgb(66, 72, 57)  #0f1112*/
+    -webkit-transition: .4s;
+    transition: .4s;
+    box-shadow: 0 0px 4px #a3f321;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 0px;
+    bottom: -1px;
+    background-color: aliceblue;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color:  #a3f321;/*rgb(35, 169, 69);   color when on */
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0px 4px #a3f321;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(38px);
+    -ms-transform: translateX(58px);
+    transform: translateX(23px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 8px;
+  }
+  
+  .slider.round:before {
+    border-radius: 100%;
+  } 
+
+ /* CSS FOR BOOK CARD CONTENT */
+
+  .nadd-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px dotted gray;
+    flex: 1 200px;
+    height: 200px;
+    max-width: 200px;
+    width: 100%;
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px; 
+    background-color: rgb(69, 74, 62);
+    position: relative;
+    display: flex;
+}
+.title {
+    border: 0px solid gray;
+    flex: 0 30px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 20px;
+    color:aliceblue;
+}
+
+.author {
+    border: 0px solid gray;
+    flex: 0 30px;
+    text-align: center;
+    padding-top: 0px;
+    font-size: 16px;
+    font-weight: 300;
+    color:rgb(129, 153, 173);
+}
+
+.rule {
+    border-top: 1px solid rgb(149, 152, 151);
+    flex: 0 90px;
+    width: 170px;
+    align-items: center;
+    margin-left: 15px;
+    max-height: 5px;
+}
+.pages, .genre {
+    border: 0px solid gray;
+    flex: 0 15px;
+    text-align:center;
+    font-size: 16px;
+    font-weight: 300;
+    color:rgb(129, 153, 173);
+}
+.card-footer {
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    justify-content: center;
+    align-items: flex-end;
+}
+.card-footer-book-read {
+    display:flex;
+    justify-content: flex-start;
+    flex: 1 100%;
+    margin-left: 15px;
+    width: 125px;
+    line-height: 9px;
+    color:rgb(87, 123, 86);
+}
+.card-footer-delete {
+    display:flex;
+    justify-content: flex-end;
+    flex: 1 15%;
+    width: 40px;
+    line-height: 14px;
+}
+.status {
+    padding-left: 3px;
+}
+.special {
+    font-weight: 500;
+    color:aliceblue;
+}
+
+ /* END CSS FOR BOOK CARD CONTENT */
+
+
+/* CSS FOr Modal */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 80px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content-container {
+    display: flex;
+
+
+    position: relative;
+    background-color:  rgb(66, 72, 57);
+    margin: auto;
+    padding: 0;
+    border: 1px dotted gray;
+    width: 340px;
+    height: 318px;
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    border-radius: 5px;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    border: 1px dotted gray;
+    flex: 1 auto;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  .close-container {
+    display:flex;
+    justify-content: space-between;
+    height: 20px;
+    border: 0px dotted gray;
+
+  }
+  /* The Close Button */
+  .close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    border: 0px dotted gray;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  } 
+
+
+  /* CSS for form on modal*/
+  .modal-header {
+    padding: 3px 8px;
+    color: white;
+  }
+  .book-add-form {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 15px;
+    margin-top: 19px;
+  }
+  label {
+    color:rgb(129, 153, 173);
+  }
+
+
+  #title, #author {
+    width: 295px;
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 2px 5px;
+    margin: 5px 0px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: rgb(69, 74, 62);
+    color: aliceblue;
+  }  
+
+
+  select {
+    width: 155px;
+    border-radius: 5px;
+    padding: 2px 5px;
+    border: 1px solid gray;
+    background-color: rgb(69, 74, 62);
+    color: aliceblue;
+
+  }
+  .container-slider-select {
+    border: 0px solid gray;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+    width: 295px;
+    margin-top: 5px;
+    line-height: 7px;    
+  }
+  .read-slider {
+    display:flex;
+    padding-top: 5px;
+    border: 0px solid gray;
+    width: 100%;
+  }
+  .modal-status {
+    border: 0px solid gray;
+    padding-left: 2px;
+    color:rgb(87, 123, 86);
+  }
+  
+  .container-buttons {
+    border: 0px solid gray;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+    width: 295px;
+    margin-top: 5px;
+  }
+
+  input[type=button], input[type=submit] {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #2f6b31;
+    color: white;
+    padding: 3px 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .container-num-pages {
+    display: flex;
+    justify-content: flex-start;
+    border: 0px solid gray;
+    margin-top: 10px;
+    padding-left: 8px;
+    gap: 5px;
+  } 
+  .num-pages {
+    line-height: 35px;
+    color:rgb(129, 153, 173);
+    margin-left: -8px;
+  }
+  #num-pages {
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 2px 5px;
+    margin: 5px 9px;
+    width: 60px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: rgb(69, 74, 62);
+    color: aliceblue;
+  }
+
+  .line {
+    border-top: 1px dotted rgb(149, 152, 151);
+    width: 94%;
+    align-items: center;
+    max-height: 5px;
+    margin-top: 18px;
+  }
+
+  input[type=button] {
+    background-color: #2f6b31;
+    cursor: pointer;
+
+  }
+  input[type=button]:hover {
+    background-color: #6da216;
+  }
+  
+
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
