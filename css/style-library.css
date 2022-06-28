@@ -420,10 +420,11 @@ a {
     width: 100%;
   }
   .modal-status {
-    border: 0px solid gray;
+    border: 1px solid gray;
     padding-left: 2px;
     color:rgb(87, 123, 86);
-    font-size: 14px;
+   
+    width: 100px;
   }
   
   .container-buttons {
