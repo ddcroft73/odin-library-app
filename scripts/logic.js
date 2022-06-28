@@ -1,6 +1,16 @@
-
+/**
+ * Library app project app for the Odin Project. The assignment was to create a library app that adds book objects
+ * to an array. The use should be able to delete the books and when added they should be displayed in a table or
+ * via "cards".
+ * 
+ * I added localStorage support so it could be used. But it never will. I used 2 differnt OOD design patterns for this
+ * project. A factory fucntion pattern to create the books, and a module patern to create the library the books are 
+ * kept in.
+ */
 
 'use strict' 
+
+
 
 
 //Factory function pattern to create book objects.
@@ -13,12 +23,9 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
         genre: genre,
         read: read,
         bookID: bookID,
-
-        // displays this books info on screen in a card format.   
-        // This got a bit out of control... on second thought it would have been less code to create the HTML and keep it 
-        // hidden, and then clone the div giving each one a unique ID. But I really just wanted to dynamically generate
-        // the HTML ith JS. Haven;t learned much JQuery yet so maybe that will be better. As of now I'm enjoying
-        // vanilla JS. 
+        
+        // I really wanted to play with dynamic generation of HTML so I did this the long way. A better way with less
+        // code would have been to create it by hand, hide it, and then clone the div for each new book.
         generateBookCard() {         
             const main_container = document.querySelector('.main-container');
             const card_add = document.querySelector('.add-card');
@@ -153,108 +160,106 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
 // loaded and creates the library object which handles the books.
 let library = (() =>  {
     
-   let _book;            // individual book object  
-   let _userInput;       // object to hold input from user
-   let _num_books = 0;   
-   let _bookStorage = [];
-   let _books = [];       // an array of books
-
-   let bookIDsInStorage = [];
-   
-   // get any books already saved, this function auto invokes onLoad right
-   //with the ligrary object function.
-   (() => {
-       _bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
-       bookIDsInStorage = fetchBookIds();
-       console.log(_bookStorage);
-       // for each object in the array, create a book and generate a card.    
-       _bookStorage.forEach(loadBook);
-   })();
-
-   // load the books in storage one by one.
-   function loadBook(item){
-      // destructure the object and create a book for each one saved.
-      _book = createBook(item);
-      _book.generateBookCard();
-   };
-
-   // gets all the IDs of the previuosly saved books so that a comparison is made when
-   // creating a unique ID 
-   function fetchBookIds()  {
-        let returnArray = [];
-        for (let i = 0; i < _bookStorage.length; i++) {
-            returnArray.push(_bookStorage[i].bookID);
-        }
-        return returnArray;
-   };
-
-   // save this book to locaStorage
-   const saveBookToStorage = (book) => {    
-        _bookStorage.push(book);
-        localStorage.setItem('books', JSON.stringify(_bookStorage));
-   }
-   
-   const deleteBookFromStorage = (bookID) => {    
-        //
-        // get the element by data Index
-        let container = document.querySelector('.main-container');
-        let all_cards = document.querySelectorAll('.nadd-card');
-        let index = null;
-
-        for (let i = 0; i < all_cards.length; i++) {
-            index = all_cards[i].getAttribute('data-index');
-            if (index == bookID) {
-                container.removeChild(all_cards[i]);
-            }
-        }    
-        // loop through the bookStorage array and find the index of this book
-        for (let i = 0; i < _bookStorage.length; i++){
-            if (_bookStorage[i].bookID == bookID) {
-                console.log(index + ' ' + bookID);
-                _bookStorage.splice(i, 1);
-                localStorage.setItem('books', JSON.stringify(_bookStorage));
-                console.log(`Book ID ${bookID} has been removed from DOM and localStorage.`);
-            }
-        }        
+    let _book;            // individual book object  
+    let _userInput;       // object to hold input from user
+    let _num_books = 0;   
+    let _bookStorage = [];
+    let _books = [];       // an array of books
+ 
+    let bookIDsInStorage = [];
+    
+    // get any books already saved, this function auto invokes onLoad right
+    //with the ligrary object function.
+    (() => {
+        _bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
+        bookIDsInStorage = fetchBookIds();
+        console.log(_bookStorage);
+        // for each object in the array, create a book and generate a card.    
+        _bookStorage.forEach(loadBook);
+    })();
+ 
+    // load the books in storage one by one.
+    function loadBook(item){
+       // destructure the object and create a book for each one saved.
+       _book = createBook(item);
+       _book.generateBookCard();
+    };
+ 
+    // gets all the IDs of the previuosly saved books so that a comparison is made when
+    // creating a unique ID 
+    function fetchBookIds()  {
+         let returnArray = [];
+         for (let i = 0; i < _bookStorage.length; i++) {
+             returnArray.push(_bookStorage[i].bookID);
+         }
+         return returnArray;
+    };
+ 
+    // save this book to locaStorage
+    const saveBookToStorage = (book) => {    
+         _bookStorage.push(book);
+         localStorage.setItem('books', JSON.stringify(_bookStorage));
     }
-
-    // update this books Read attribute
-   const updateBookInStorage = (bookID) => {    
-        //
-        //
-    }
-
-
-   return { 
-        newBook: () => {
-           _userInput = validInput(bookIDsInStorage);
-           if (_userInput) {
-                // fire the factory to make the book
-                _book = createBook(_userInput);
-                _book.generateBookCard();
-                library.addBook(_book);                
-            }
-        },
-
-        addBook: (newBook) => {
-           _books.push(newBook)
-           _num_books++;
-           saveBookToStorage(newBook);             
-        },  
-
-        deleteBook: (bookID) => {
-            _num_books--;
-            deleteBookFromStorage(bookID);
-        },
-
-        updateBook: (bookID) => {
-            console.log(`book ${bookID} updated.`);
-        },
-     // books,      // 
-     // bookIDsInStorage // returns all books in storage to refer to for unique IDS
-   };
-})();
-
+    
+    const deleteBookFromStorage = (bookID) => {    
+         //
+         // get the element by data Index
+         let container = document.querySelector('.main-container');
+         let all_cards = document.querySelectorAll('.nadd-card');
+         let index = null;
+ 
+         for (let i = 0; i < all_cards.length; i++) {
+             index = all_cards[i].getAttribute('data-index');
+             if (index == bookID) {
+                 container.removeChild(all_cards[i]);
+             }
+         }    
+         // loop through the bookStorage array and find the index of this book
+         for (let i = 0; i < _bookStorage.length; i++){
+             if (_bookStorage[i].bookID == bookID) {
+                 console.log(index + ' ' + bookID);
+                 _bookStorage.splice(i, 1);
+                 localStorage.setItem('books', JSON.stringify(_bookStorage));
+                 console.log(`Book ID ${bookID} has been removed from DOM and localStorage.`);
+             }
+         }        
+     }
+ 
+     // update this books Read attribute
+    const updateBookInStorage = (bookID) => {    
+         //
+         //
+     } 
+ 
+    return { 
+         newBook: () => {
+            _userInput = validInput(bookIDsInStorage);
+            if (_userInput) {
+                 // fire the factory to make the book
+                 _book = createBook(_userInput);
+                 _book.generateBookCard();
+                 library.addBook(_book);                
+             }
+         },
+ 
+         addBook: (newBook) => {
+            _books.push(newBook)
+            _num_books++;
+            saveBookToStorage(newBook);             
+         },  
+ 
+         deleteBook: (bookID) => {
+             _num_books--;
+             deleteBookFromStorage(bookID);
+         },
+ 
+         updateBook: (bookID) => {
+             console.log(`book ${bookID} updated.`);
+         },
+      // books,      // 
+      // bookIDsInStorage // returns all books in storage to refer to for unique IDS
+    };
+ })();
 
 const validInput = (currIds) => {  
     const title = document.getElementById('title').value;

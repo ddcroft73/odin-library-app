@@ -230,7 +230,7 @@ a {
     flex: 0 30px;
     text-align: center;
     padding-top: 10px;
-    font-size: 20px;
+    font-size: 18px;
     color:aliceblue;
 }
 
@@ -239,8 +239,8 @@ a {
     flex: 0 30px;
     text-align: center;
     padding-top: 0px;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 200;
     color:rgb(129, 153, 173);
 }
 
@@ -256,8 +256,8 @@ a {
     border: 0px solid gray;
     flex: 0 15px;
     text-align:center;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 100;
     color:rgb(129, 153, 173);
 }
 .card-footer {
