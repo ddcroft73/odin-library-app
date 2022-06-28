@@ -321,7 +321,7 @@ a {
     padding: 0;
     border: 1px dotted gray;
     width: 340px;
-    height: 318px;
+    height: 358px;
     box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -423,6 +423,7 @@ a {
     border: 0px solid gray;
     padding-left: 2px;
     color:rgb(87, 123, 86);
+    font-size: 14px;
   }
   
   .container-buttons {
