@@ -1,1 +1,9 @@
-Learned a lot with this litle application. I learned that I could have written a lot less code by cloning a div instead of dynamically generating the entire card. However it was a good lesson because it taught me that when you do generate HTML, you have to also create the events and actions associated with it as well. I had thought that I could make a blueprint of the "card" and bind events, and then generate the HTMl to match. But I was wrong. I also learned that I am terrrible at webDesign. I ended up looking at others solutioins (not the code, I could not sleep if I did) to get an idea on how to design the interface. My colors are questionable but I am happy with the over all "mobile" type theme and I managed to get it 100% responsive. 
+I need to work onthe responsiveness between mobile and Desktop. I got it to line up right, but the modal is too big on desktop and too small on mobile. I could have solved this with a media query. Its a simple design but the coding was fun. I learned a lot about design patterns and how JS works. 
+<br>
+<br>
+The responsiveness is not good enough as far as the titles you enter. If the book title is too long it gets crowded. Next time I will design the "cards" to expand for the information.
+Also the cards should expand when on mobile.
+<br><br>
+I could make the font responsive as well... 
+<br>
+It's all about learning... slowly I am.

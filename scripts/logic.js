@@ -163,16 +163,14 @@ let library = (() =>  {
     let _book;            // individual book object  
     let _userInput;       // object to hold input from user
     let _num_books = 0;   
-    let _bookStorage = [];
-    let _books = [];       // an array of books
- 
-    let bookIDsInStorage = [];
+    let _bookStorage = []; 
+    let _bookIDsInStorage = [];
     
     // get any books already saved, this function auto invokes onLoad right
     //with the ligrary object function.
     (() => {
         _bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
-        bookIDsInStorage = fetchBookIds();
+        _bookIDsInStorage = fetchBookIds();
         console.log(_bookStorage);
         // for each object in the array, create a book and generate a card.    
         _bookStorage.forEach(loadBook);
@@ -234,21 +232,17 @@ let library = (() =>  {
  
     return { 
          newBook: () => {
-            _userInput = validInput(bookIDsInStorage);
+            _userInput = validInput(_bookIDsInStorage);
             if (_userInput) {
                  // fire the factory to make the book
                  _book = createBook(_userInput);
                  _book.generateBookCard();
-                 library.addBook(_book);                
+                // _books.push(newBook)
+                 _num_books++;
+                 saveBookToStorage(_book);               
              }
          },
- 
-         addBook: (newBook) => {
-            _books.push(newBook)
-            _num_books++;
-            saveBookToStorage(newBook);             
-         },  
- 
+  
          deleteBook: (bookID) => {
              _num_books--;
              deleteBookFromStorage(bookID);
@@ -321,7 +315,8 @@ const resetModalFileds = () => {
     
     let modal = document.getElementById("add-modal");
     modal.style.display = 'none';
-}
+} 
+
 
 // capitalize all words and insert commas as needed.
 const formatInput = (input) => {
