@@ -226,6 +226,7 @@ let library = (() =>  {
      }
  
      // update this books Read attribute
+     // did not finish
     const updateBookInStorage = (bookID) => {    
          //
          //
@@ -255,9 +256,7 @@ let library = (() =>  {
  
          updateBook: (bookID) => {
              console.log(`book ${bookID} updated.`);
-         },
-      // books,      // 
-      // bookIDsInStorage // returns all books in storage to refer to for unique IDS
+         }
     };
  })();
 
@@ -293,7 +292,7 @@ const validInput = (currIds) => {
    return userInput;    
 }
 
-// gets a unique book ID witha random # 1-300. 
+// creates a unique book ID witha random # 1-300. 
 const createUniqueID = (currBookIds) => {    
     let idExists = true;
     let newID = null;
@@ -302,7 +301,8 @@ const createUniqueID = (currBookIds) => {
         // generate anew ID # between 1 and 300
         newID = Math.floor(Math.random() * 300) + 1; 
         // is it in use?
-        if (currBookIds.indexOf(newID)) {
+
+        if (currBookIds.indexOf(newID) == -1) {
           idExists = false;
         }
     }
@@ -322,6 +322,7 @@ const resetModalFileds = () => {
     let modal = document.getElementById("add-modal");
     modal.style.display = 'none';
 }
+
 // capitalize all words and insert commas as needed.
 const formatInput = (input) => {
     let num_pages = input.num_pages;
