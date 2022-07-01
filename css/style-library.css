@@ -99,8 +99,8 @@ body {
     .add-card {
         border: 1px dotted gray;
         flex: 1 200px;
-        height: 200px;
-        max-width: 200px;
+        height: 250px;
+        max-width: 250px;
         width: 100%;
         box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
         border-radius: 5px; 
@@ -116,8 +116,8 @@ body {
         content: "+";
         text-shadow: 3px 3px 4px  rgba(0, 0, 0, 0.2);
 
-        height:200px;
-        width:200px;
+        height:250px;
+        width:250px;
         font-size:120px;
         display:flex;
         flex-direction:row;
@@ -216,8 +216,8 @@ a {
     flex-direction: column;
     border: 1px dotted gray;
     flex: 1 200px;
-    height: 200px;
-    max-width: 200px;
+    height: 250px;
+    max-width: 250px;
     width: 100%;
     box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px; 
@@ -249,7 +249,7 @@ a {
     flex: 0 90px;
     width: 170px;
     align-items: center;
-    margin-left: 15px;
+    margin-left: 35px;
     max-height: 5px;
 }
 .pages, .genre {
@@ -268,15 +268,17 @@ a {
     align-items: flex-end;
 }
 .card-footer-book-read {
+    border: 0 solid gray;
     display:flex;
     justify-content: flex-start;
     flex: 1 100%;
     margin-left: 15px;
-    width: 125px;
+    width: 160px;
     line-height: 9px;
     color:rgb(87, 123, 86);
 }
 .card-footer-delete {
+    border: 0px solid gray;
     display:flex;
     justify-content: flex-end;
     flex: 1 15%;
