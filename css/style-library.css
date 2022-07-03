@@ -150,11 +150,13 @@ body {
             gap: 15px;
             height: 100%;
         }    
+
+        /* make the cards expand on mobile.*/
 }
 
     .add-card {
         border: 1px dotted gray;
-        flex: 1 200px;
+        flex: 1 250px;
         height: 250px;
         max-width: 250px;
         width: 100%;
@@ -172,12 +174,12 @@ body {
     }
 
     .new-book::before {
-        content: "+";
-        text-shadow: 3px 3px 4px  rgba(0, 0, 0, 0.2);
+        content: "+ book";
+        text-shadow: 3px 3px 5px  rgba(0, 0, 0, 0.2);
 
         height:250px;
         width:250px;
-        font-size:120px;
+        font-size:45px;
         display:flex;
         flex-direction:row;
         align-items:center;
@@ -294,19 +296,12 @@ a {
     text-align: center;
     margin-top: 20px;
     font-size: 22px;
+    font-weight: 300;
     color:aliceblue;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
 }
-img {
-    border: 0px solid gray;
-}
-.delete-text {
-    border: 1px solid gray;
-
-}
-
 .author {
     border: 0px solid gray;
     flex: 0 30px;
@@ -369,7 +364,7 @@ img {
     padding-left: 3px;
 }
 .special {
-    font-weight: 500;
+    font-weight: 300;
     color:aliceblue;
 }
 
@@ -403,7 +398,7 @@ img {
     padding: 0;
     border: 1px dotted gray;
     width: 340px;
-    height: 338px;
+    height: 348px;
     box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -464,26 +459,31 @@ img {
   }
   label {
     color:rgb(129, 153, 173);
+    font-size: 14px;
   }
 
 
-  #title, #author {
+  #title, #author, #num-pages {
     width: 295px;
-    border-radius: 3px;
-    margin-top: 5px;
-    padding: 2px 5px;
-    margin: 5px 0px;
-    border: 1px solid gray;
+    height: 30px;
     border-radius: 5px;
+    padding: 0px 10px;
+    margin: 5px 0px;
+    margin-top:8px;
+    margin-bottom:8px;
+    border: 1px solid gray;
     background-color: rgb(69, 74, 62);
     color: aliceblue;
+    font-size: 14px;
   }  
 
 
   select {
+    height: 30px;
     width: 155px;
     border-radius: 5px;
     padding: 2px 5px;
+    margin-bottom:8px;
     border: 1px solid gray;
     background-color: rgb(69, 74, 62);
     color: aliceblue;
