@@ -156,7 +156,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             deleteIconContainer.addEventListener('click', () => {
                 library.deleteBook(bookID);
             });
-        } 
+        }
         
     }; 
 }

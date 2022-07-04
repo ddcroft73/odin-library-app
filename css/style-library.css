@@ -295,7 +295,10 @@ a {
     display: flex;
 }
 .nadd-card:hover {    
-        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(25, 210, 84, 0.19);
+}
+.nadd-card:active {    
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
 }
 .title {
     border: 1px solid gray;
