@@ -67,7 +67,18 @@
     </div>
 
     <div class="footer"> &COPY; <a href = "mailto: gen.disarray73@outlook.com">general_disarray</a> 2022</div>
+<!--tooltips-->
+
+<!--<div class="tooltip-title">
     
+</div> 
+<div class="tooltip-author">
+
+</div> 
+<div class="tooltip-num-pages">
+
+</div> -->
+
 <!-- MODAL HTML-->
  <div id="add-modal" class="modal">
     <!-- Modal content -->
@@ -86,12 +97,14 @@
                                 id="title" 
                                 name="title" 
                                 placeholder="Book Title">
-
+                        <span class="tooltip-title">Please enter a title.</span>
+                        
                         <label for="author">Author:</label>
                         <input type="text" 
                                id="author" 
                                name="author" 
-                               placeholder="Book Author">
+                               placeholder="Book Author">                        
+                        <span class="tooltip-author">Please enter an author.</span>
 
                         <label for="genre-selector">Select Genre:</label>
                         <div class="container-slider-select">
@@ -119,6 +132,7 @@
                         <div class="container-num-pages">
                             <div class="num-pages">Total Pages:</div>
                             <input  type="number" min="1" id="num-pages" name="num-pages" value=1>
+                            <span class="tooltip-pages">A book must have at lteast 1 page.</span>
                         </div>
 
                         <div class="line"></div>

@@ -278,18 +278,16 @@ const validInput = (currIds) => {
     const num_pages = document.getElementById('num-pages').value;
     const genre = document.getElementById('book-genre').value;
     let read = document.getElementById('modal-status').textContent; 
-    let msg = '';
+    let tip = '';
    
-   if (title === '' || author === '') {
-       if (title === '') msg = `a title for the book`;
-       if (author === '') msg = `an author for the book`;
-       if (title === '' && author === '') msg = 'the title and author information.'
-       alert(`Please enter ${msg}.`);
+   if (title === '' || author === '' || num_pages < 1) {
+       if (title === '') tip = `title`;
+       if (author === '') tip = `author`;
+       if (num_pages === '' || num_pages < 1) tip = `pages`;
+       if (title === '' && author === '') tip = 'title author';
+
+       displayTooltip(tip);
        return false;
-   }
-   if (num_pages < 1){
-      alert(`Bokk gotta have at least one page.`);
-      return false;
    }
    read ==='Read' ? read = true : read = false;
    
@@ -306,6 +304,25 @@ const validInput = (currIds) => {
    resetModalFileds();
 
    return userInput;    
+}
+
+const displayTooltip = (tip) => {
+    // depending on the "tip" make visible the help needed.
+    if (tip === 'title') {        
+        titleTip.style.visibility = 'visible';
+    }
+    if (tip === 'author') {        
+        authorTip.style.visibility = 'visible';
+    }
+    if (tip === 'pages') {        
+        pagesTip.style.visibility = 'visible';
+    }
+
+    if (tip === 'title author') {        
+        titleTip.style.visibility = 'visible';
+        authorTip.style.visibility = 'visible';
+    }
+
 }
 
 // creates a unique book ID witha random # 1-300. 
@@ -327,7 +344,7 @@ const createUniqueID = (currBookIds) => {
 
 // resets all the fields after a submission. I did not use 'submit' with this because
 // the form is for nothing but userinput. Nothing to submit. No backend to process the input.
-const resetModalFileds = () => {
+const resetModalFileds = (userReset) => {
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
     document.getElementById('num-pages').value = 1;
@@ -336,7 +353,7 @@ const resetModalFileds = () => {
     document.getElementById('modal-status').textContent = 'Not Read';     
     
     let modal = document.getElementById("add-modal");
-    modal.style.display = 'none';
+    if (!userReset)  modal.style.display = 'none';
 } 
 
 

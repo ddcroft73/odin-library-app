@@ -140,6 +140,7 @@ body {
             height: 100%;
             margin-left: 50px;
         }
+
 }
 /* if the screen is mobile, center the flex items*/
 @media screen and (max-width: 480px) {
@@ -150,7 +151,6 @@ body {
             align-items: center;
             padding-top: 50px;
             gap: 15px;
-            height: 100%;
         }    
 
         /* make the cards expand on mobile.*/
@@ -305,6 +305,92 @@ a {
     margin-right: 10px;
     margin-bottom: 5px;
 }
+
+.tooltip-title {
+    visibility: hidden;
+    background-color:white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    font-size: 14px;
+    
+    position: absolute;
+    z-index: 1;
+    top: 40px;
+    left: 50%;
+    margin-left: -140px;
+    border: 1px solid gray;
+
+}
+.tooltip-title::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  white transparent transparent transparent;
+  }
+
+.tooltip-author {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    font-size: 14px;
+    
+    position: absolute;
+    z-index: 1;
+    top: 100px;
+    left: 50%;
+    margin-left: -140px;
+    border: 1px solid gray;
+
+}
+/*.tooltip-author::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  white transparent transparent transparent;
+  }*/
+
+  .tooltip-pages {
+    visibility: hidden;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    font-size: 14px;
+    
+    position: absolute;
+    z-index: 1;
+    top: 210px;
+    left: 50%;
+    margin-left: -140px;
+    border: 1px solid gray;
+
+}
+.tooltip-pages::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  white transparent transparent transparent;
+  }  
+
+
 .author {
     border: 0px solid gray;
     flex: 0 30px;

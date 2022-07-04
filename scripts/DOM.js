@@ -1,5 +1,27 @@
 /* DOM event listeners and actions. */
 
+/* detect when the user is typin in title or author box */
+const titleTip = document.querySelector('.tooltip-title');
+const authorTip = document.querySelector('.tooltip-author');
+const pagesTip = document.querySelector('.tooltip-pages');
+
+const titleBox = document.querySelector('#title');
+const authorBox = document.querySelector('#author');
+const pagesBox = document.querySelector('#num-pages');
+
+titleBox.addEventListener('keydown', () => {
+    // disable the typing reminder.
+    titleTip.style.visibility = 'hidden';
+});
+authorBox.addEventListener('keydown', () => {
+    // disable the typing reminder.
+    authorTip.style.visibility = 'hidden';
+});
+pagesBox.addEventListener('keydown', () => {
+    // disable the typing reminder.
+    pagesTip.style.visibility = 'hidden';
+});
+
 //Save Book Event 
 const save_book = document.querySelector('#save');
 save_book.addEventListener('click', () => {
@@ -9,7 +31,7 @@ save_book.addEventListener('click', () => {
 /* trap click events for the test button */
 const testButton = document.querySelector('.sample-data');
 testButton.addEventListener('click', () => {
-     // generate book data for 12 books.
+     // generate book data for 7 books.
      buildSampleData();
  });
 
@@ -38,6 +60,8 @@ modal_read_checkbox.addEventListener('click', () => {
 const modal = document.getElementById("add-modal");
 const btn = document.getElementById("add-btn");
 const span = document.getElementsByClassName("close")[0];
+const resetBtn = document.getElementById('reset');
+
 //show
 btn.addEventListener('click', () => modal.style.display = "block");
 // close button
@@ -48,4 +72,9 @@ window.addEventListener('click', (event) =>{
         resetModalFileds();
     }
 });    
+
+resetBtn.addEventListener('click', () => resetModalFileds(true));
+
+
+
 
