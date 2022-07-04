@@ -1,4 +1,6 @@
+'use strict' 
 /**
+ * 
  * Library app project app for the Odin Project. The assignment was to create a library app that adds book objects
  * to an array. The use should be able to delete the books and when added they should be displayed in a table or
  * via "cards".
@@ -7,10 +9,6 @@
  * project. A factory fucntion pattern to create the books, and a module patern to create the library the books are 
  * kept in.
  */
-
-'use strict' 
-
-
 
 
 //Factory function pattern to create book objects.
@@ -27,13 +25,16 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
         // I really wanted to play with dynamic generation of HTML so I did this the long way. A better way with less
         // code would have been to create it by hand, hide it, and then clone the div for each new book.
         generateBookCard() {         
+            // the container the card is in
             const main_container = document.querySelector('.main-container');
+            //the div it goes above
             const card_add = document.querySelector('.add-card');
 
+            // element, class[], insertBefoe, append, textContnet, ID, type
             // create a new div for a card give it a class name and set data-index. 
             const main_div = document.createElement('div');
             main_div.classList.add('nadd-card');
-            main_div.setAttribute('data-index', bookID);
+            main_div.setAttribute('data-index', this.bookID);
             main_container.insertBefore(main_div, card_add);
 
             // add the div for the Title and add the title Info
@@ -105,6 +106,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             delete_div.id = `delete`+this.bookID;
             footer_container.appendChild(delete_div)
 
+
             // add the image for deleting the book.
             const img = document.createElement('img');
             img.src = './images/delete.png';
@@ -138,9 +140,11 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             read_checkbox.addEventListener('click', () => {
                 if ( read_checkbox.checked ) { 
                      status_text.textContent = 'Read';
+                     library.updateBook(bookID, true);
                 } else {
                      status_text.textContent = 'Not Read';
-                }
+                     library.updateBook(bookID, false);
+                }                
             });
         },
 
@@ -162,7 +166,6 @@ let library = (() =>  {
     
     let _book;            // individual book object  
     let _userInput;       // object to hold input from user
-    let _num_books = 0;   
     let _bookStorage = []; 
     let _bookIDsInStorage = [];
     
@@ -170,7 +173,7 @@ let library = (() =>  {
     //with the ligrary object function.
     (() => {
         _bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
-        _bookIDsInStorage = fetchBookIds();
+        _bookIDsInStorage = fetchBookIds(_bookStorage);
         console.log(_bookStorage);
         // for each object in the array, create a book and generate a card.    
         _bookStorage.forEach(loadBook);
@@ -178,17 +181,16 @@ let library = (() =>  {
  
     // load the books in storage one by one.
     function loadBook(item){
-       // destructure the object and create a book for each one saved.
        _book = createBook(item);
        _book.generateBookCard();
     };
  
     // gets all the IDs of the previuosly saved books so that a comparison is made when
     // creating a unique ID 
-    function fetchBookIds()  {
+    function fetchBookIds(bookArray)  {
          let returnArray = [];
-         for (let i = 0; i < _bookStorage.length; i++) {
-             returnArray.push(_bookStorage[i].bookID);
+         for (let i = 0; i < bookArray.length; i++) {
+             returnArray.push(bookArray[i].bookID);
          }
          return returnArray;
     };
@@ -204,52 +206,72 @@ let library = (() =>  {
          // get the element by data Index
          let container = document.querySelector('.main-container');
          let all_cards = document.querySelectorAll('.nadd-card');
-         let index = null;
+         let index = null;         
  
          for (let i = 0; i < all_cards.length; i++) {
              index = all_cards[i].getAttribute('data-index');
              if (index == bookID) {
                  container.removeChild(all_cards[i]);
              }
-         }    
-         // loop through the bookStorage array and find the index of this book
-         for (let i = 0; i < _bookStorage.length; i++){
-             if (_bookStorage[i].bookID == bookID) {
-                 console.log(index + ' ' + bookID);
-                 _bookStorage.splice(i, 1);
-                 localStorage.setItem('books', JSON.stringify(_bookStorage));
-                 console.log(`Book ID ${bookID} has been removed from DOM and localStorage.`);
-             }
-         }        
+         }             
+         const bookIndex = getBook(_bookStorage, bookID);
+
+         if (bookIndex != -1) {
+            console.log(index + ' ' + bookID);
+            _bookStorage.splice(bookIndex, 1);
+            localStorage.setItem('books', JSON.stringify(_bookStorage));
+            console.log(`Book ID ${bookID} has been removed from DOM and localStorage.`);
+         }
      }
- 
-     // update this books Read attribute
-     // did not finish
-    const updateBookInStorage = (bookID) => {    
-         //
-         //
+     
+    const updateBookInStorage = (bookID, read) => {    
+        const bookIndex = getBook(_bookStorage, bookID);
+        //change the read property and save the data
+        if (bookIndex != -1) {
+            _bookStorage[bookIndex].read = read;
+            localStorage.setItem('books', JSON.stringify(_bookStorage));
+        }    
      } 
- 
+    
+    // finds and returns the array index of the book by ID
+    const getBook = (array, bookID) => {
+        for (let i = 0; i < array.length; i++){
+            if (array[i].bookID == bookID) {
+                return i;
+            }
+        }      
+        return -1;
+    }
+
+    // expose the methods to manipulate a book.
     return { 
-         newBook: () => {
-            _userInput = validInput(_bookIDsInStorage);
-            if (_userInput) {
-                 // fire the factory to make the book
-                 _book = createBook(_userInput);
-                 _book.generateBookCard();
-                // _books.push(newBook)
-                 _num_books++;
-                 saveBookToStorage(_book);               
-             }
+         newBook: (sample, bookInfo) => {            
+            if(!sample) {
+                _userInput = validInput(_bookIDsInStorage);
+                if (_userInput) {
+                    // fire the factory to make the book
+                    _book = createBook(_userInput);
+                    _book.generateBookCard();   
+                    saveBookToStorage(_book);               
+                }
+            } else {
+                // sample book data
+                _book = createBook(bookInfo);
+                _book.generateBookCard(); 
+                saveBookToStorage(_book); 
+            }   
          },
   
          deleteBook: (bookID) => {
-             _num_books--;
              deleteBookFromStorage(bookID);
          },
  
-         updateBook: (bookID) => {
-             console.log(`book ${bookID} updated.`);
+         updateBook: (bookID, read) => {
+            updateBookInStorage(bookID, read);
+         },
+
+         deleteAll: () => {
+             console.log('deleting all books.');
          }
     };
  })();
@@ -268,6 +290,10 @@ const validInput = (currIds) => {
        if (title === '' && author === '') msg = 'the title and author information.'
        alert(`Please enter ${msg}.`);
        return false;
+   }
+   if (num_pages < 1){
+      alert(`Bokk gotta have at least one page.`);
+      return false;
    }
    read ==='Read' ? read = true : read = false;
    

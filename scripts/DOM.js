@@ -3,8 +3,23 @@
 //Save Book Event 
 const save_book = document.querySelector('#save');
 save_book.addEventListener('click', () => {
-    library.newBook();
+    library.newBook(false);
 });
+
+/* trap click events for the test button */
+const testButton = document.querySelector('.sample-data');
+testButton.addEventListener('click', () => {
+     // generate book data for 12 books.
+     buildSampleData();
+ });
+
+ /* trap click events for the reset button */
+const resetButton = document.querySelector('.reset');
+resetButton.addEventListener('click', () => {
+     // clear all the books.
+    library.deleteAll();
+ });
+
 
 // toggle for read slider on the addbook modal
 const modal_read_checkbox = document.querySelector('#modal-read');
@@ -33,3 +48,4 @@ window.addEventListener('click', (event) =>{
         resetModalFileds();
     }
 });    
+

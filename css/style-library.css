@@ -47,10 +47,12 @@ table {
 	border-spacing: 0;
 }
 
+
 * {
-    border: 0px solid gray;    
+    border: 1px solid gray;    
     box-sizing: border-box;
 }
+
 h1, h2, h3 {
     margin : 0;
     padding: 0;
@@ -60,8 +62,6 @@ html {
     box-sizing: border-box;
 }
 
-/* dark mode sort of, is how it starts, light mode will only shift to slightly brighter shades 
-of greem and white vs army green and gray   */
 body {
     margin: 0;
     background-color: rgb(66, 72, 57);
@@ -80,6 +80,7 @@ body {
 }
 
     .header-left, .header-right {
+        border: 0px solid #a3f321;
         display: flex;
         flex: 1;
     }
@@ -101,30 +102,31 @@ body {
     .header-right {
         justify-content: flex-end;
         border: 0px solid #a3f321;
-        gap: 10px;
+        gap: 3px;
         margin-right: 30px;
     }
-    .header-right-inside {              
+    .header-right-inside{           
+        border: 0px solid #a3f321;   
         padding-top: 5px;
     }
-        .reset {
+        .sample-data, .reset {
             margin-bottom: 5px;
             font-size: 18px;
             font-weight: 100;
             border: 1px solid rgb(201, 199, 193);
             padding: 0px 20px;
             border-radius: 5px;
-            background-color: rgb(66, 72, 57);
+            background-color: rgb(87, 101, 65);
             color: rgb(201, 199, 193);  
             width: 80px;  
             text-align: center;
             line-height: 28px;
         }
-        .reset:hover {
-            background-color: rgb(87, 101, 65);
+        .sample-data:hover, .reset:hover{
+            cursor:pointer;
         }
-        .reset:active {
-            background-color: white;
+        .sample-data:active, .reset:active {
+            background-color: rgb(66, 72, 57);
         }
 
 /* If the screen is bigger than a tablet, dont' center the flex items*/    
@@ -166,6 +168,7 @@ body {
     }
     .add-card:hover {
         box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+        cursor:pointer;
        
     }
     .add-card:active {
@@ -174,7 +177,7 @@ body {
     }
 
     .new-book::before {
-        content: "+ book";
+        content: "+book";
         text-shadow: 3px 3px 5px  rgba(0, 0, 0, 0.2);
 
         height:250px;
@@ -277,7 +280,7 @@ a {
     display: flex;
     flex-direction: column;
     border: 1px dotted gray;
-    flex: 1 200px;
+    flex: 1 250px;
     height: 250px;
     max-width: 250px;
     width: 100%;
