@@ -152,7 +152,6 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
         bindEvent_clickOnDelete(bookID){
             const deleteIconContainer = document.querySelector('#delete'+bookID);
             deleteIconContainer.addEventListener('click', () => {
-                // delete this book from the aray and from the local storage
                 library.deleteBook(bookID);
             });
         } 
@@ -169,13 +168,10 @@ let library = (() =>  {
     let _bookStorage = []; 
     let _bookIDsInStorage = [];
     
-    // get any books already saved, this function auto invokes onLoad right
-    //with the ligrary object function.
+    // get any books already saved.
     (() => {
         _bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
-        _bookIDsInStorage = fetchBookIds(_bookStorage);
-        console.log(_bookStorage);
-        // for each object in the array, create a book and generate a card.    
+        _bookIDsInStorage = fetchBookIds();
         _bookStorage.forEach(loadBook);
     })();
  
@@ -187,10 +183,10 @@ let library = (() =>  {
  
     // gets all the IDs of the previuosly saved books so that a comparison is made when
     // creating a unique ID 
-    function fetchBookIds(bookArray)  {
+    function fetchBookIds()  {
          let returnArray = [];
-         for (let i = 0; i < bookArray.length; i++) {
-             returnArray.push(bookArray[i].bookID);
+         for (let i = 0; i < _bookStorage.length; i++) {
+             returnArray.push(_bookStorage[i].bookID);
          }
          return returnArray;
     };
@@ -201,21 +197,20 @@ let library = (() =>  {
          localStorage.setItem('books', JSON.stringify(_bookStorage));
     }
     
-    const deleteBookFromStorage = (bookID) => {    
-         //
+    const deleteBookFromStorage = (bookID) => {   
          // get the element by data Index
          let container = document.querySelector('.main-container');
          let all_cards = document.querySelectorAll('.nadd-card');
          let index = null;         
- 
+         // remove book from DOM
          for (let i = 0; i < all_cards.length; i++) {
              index = all_cards[i].getAttribute('data-index');
              if (index == bookID) {
                  container.removeChild(all_cards[i]);
              }
          }             
+         // remove from storage
          const bookIndex = getBook(_bookStorage, bookID);
-
          if (bookIndex != -1) {
             console.log(index + ' ' + bookID);
             _bookStorage.splice(bookIndex, 1);
@@ -272,6 +267,7 @@ let library = (() =>  {
 
          deleteAll: () => {
              console.log('deleting all books.');
+             removeSampleData();
          }
     };
  })();
