@@ -277,6 +277,7 @@ a {
  /* CSS FOR BOOK CARD CONTENT */
 
   .nadd-card {
+
     display: flex;
     flex-direction: column;
     border: 1px dotted gray;
@@ -294,7 +295,7 @@ a {
         box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
 }
 .title {
-    border: 0px solid gray;
+    border: 1px solid gray;
     flex: 0 30px;
     text-align: center;
     margin-top: 20px;
@@ -351,7 +352,7 @@ a {
     border: 1px solid gray;
 
 }
-/*.tooltip-author::after {
+.tooltip-author::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -360,7 +361,7 @@ a {
     border-width: 5px;
     border-style: solid;
     border-color:  white transparent transparent transparent;
-  }*/
+  }
 
   .tooltip-pages {
     visibility: hidden;
@@ -393,15 +394,14 @@ a {
 
 .author {
     border: 0px solid gray;
-    flex: 0 30px;
+    flex: 0 ;
     text-align: center;
-    padding-top: 0px;
     font-size: 16px;
     font-weight: 200;
     color:rgb(129, 153, 173);
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .rule {
@@ -411,8 +411,8 @@ a {
     align-items: center;
     margin-left: 25px;
     max-height: 5px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 .pages, .genre {
     border: 0px solid gray;
@@ -422,6 +422,8 @@ a {
     font-weight: 100;
     color:rgb(129, 153, 173);
     margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .card-footer {
     border: 0px solid gray;
@@ -430,13 +432,15 @@ a {
     bottom: 20px;
     justify-content: center;
     align-items: flex-start;
+    margin-left: 25px;
 }
+
 .card-footer-book-read {
     border: 0px solid gray;
     display:flex;
     justify-content: flex-start;
     flex: 1 100%;
-    margin-left: 25px;
+    margin-left: 0px;
     width: 160px;
     color:rgb(87, 123, 86);
     line-height: 9px;
@@ -448,6 +452,11 @@ a {
     justify-content: flex-end;
     flex: 1 ;
     width: 40px;
+}
+
+/* add border to debug */
+.author, .title, .pages, .genre, .card-footer-book-read{    
+    border: 0px solid gray;
 }
 .status {
     padding-left: 3px;
@@ -487,7 +496,7 @@ a {
     padding: 0;
     border: 1px dotted gray;
     width: 340px;
-    height: 348px;
+    height: 365px;
     box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;

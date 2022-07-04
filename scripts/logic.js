@@ -322,7 +322,6 @@ const displayTooltip = (tip) => {
         titleTip.style.visibility = 'visible';
         authorTip.style.visibility = 'visible';
     }
-
 }
 
 // creates a unique book ID witha random # 1-300. 
