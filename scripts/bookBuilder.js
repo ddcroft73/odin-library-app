@@ -12,7 +12,7 @@ const sampleBooks = {
             bookID: 102
         },
         {
-            title: 'Object oriented programming pyrhon 3',
+            title: 'Object oriented programming python 3',
             author: 'dusty phillips',
             num_pages: '365',
             genre: 'Non-Fiction',

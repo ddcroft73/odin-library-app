@@ -64,16 +64,18 @@ const resetBtn = document.getElementById('reset');
 
 //show
 btn.addEventListener('click', () => modal.style.display = "block");
+
 // close button
-span.addEventListener('click', () => resetModalFileds());
+span.addEventListener('click', () => resetModalFields());
+
 // click outside modal window
 window.addEventListener('click', (event) =>{
     if (event.target == modal) {
-        resetModalFileds();
+        resetModalFields();
     }
 });    
 
-resetBtn.addEventListener('click', () => resetModalFileds(true));
+resetBtn.addEventListener('click', () => resetModalFields(true));
 
 
 

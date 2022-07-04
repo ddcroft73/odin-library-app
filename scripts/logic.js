@@ -46,7 +46,8 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             // add the div for the Title and add the title Info
             const author = document.createElement('div');
             author.classList.add('author');
-            author.textContent = `By: ${this.author}`;
+            //author.textContent = `By: ${this.author}`;
+            author.innerHTML = `By: <span class="special">${this.author}</span>`;
             main_div.appendChild(author);
     
             // add HR effect
@@ -97,7 +98,8 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             // inside card-footer.
             const read_status = document.createElement('div');
             read_status.classList.add('status' + this.bookID); // add ID
-            read_status.textContent = "Not Read";
+            read_status.style = 'padding-left: 5px; color: gray;'
+            read_status.textContent = `Not Read`;
             book_read.appendChild(read_status);
 
             // OTHER DIV FOR DELETE RIGHT SIDE OF FOOTER
@@ -110,7 +112,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             // add the image for deleting the book.
             const img = document.createElement('img');
             img.src = './images/delete.png';
-            img.width = '20';
+            img.width = '25';
             delete_div.appendChild(img);
 
             // trap the click event when user clicks on the "read" toggle
@@ -301,27 +303,9 @@ const validInput = (currIds) => {
    };
 
    userInput = formatInput(userInput);
-   resetModalFileds();
+   resetModalFields();
 
    return userInput;    
-}
-
-const displayTooltip = (tip) => {
-    // depending on the "tip" make visible the help needed.
-    if (tip === 'title') {        
-        titleTip.style.visibility = 'visible';
-    }
-    if (tip === 'author') {        
-        authorTip.style.visibility = 'visible';
-    }
-    if (tip === 'pages') {        
-        pagesTip.style.visibility = 'visible';
-    }
-
-    if (tip === 'title author') {        
-        titleTip.style.visibility = 'visible';
-        authorTip.style.visibility = 'visible';
-    }
 }
 
 // creates a unique book ID witha random # 1-300. 
@@ -343,7 +327,7 @@ const createUniqueID = (currBookIds) => {
 
 // resets all the fields after a submission. I did not use 'submit' with this because
 // the form is for nothing but userinput. Nothing to submit. No backend to process the input.
-const resetModalFileds = (userReset) => {
+const resetModalFields = (userReset) => {
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
     document.getElementById('num-pages').value = 1;
@@ -352,8 +336,32 @@ const resetModalFileds = (userReset) => {
     document.getElementById('modal-status').textContent = 'Not Read';     
     
     let modal = document.getElementById("add-modal");
-    if (!userReset)  modal.style.display = 'none';
+    if (!userReset) modal.style.display = 'none';
+    hideToolTips();
 } 
+
+const displayTooltip = (tip) => {
+    // depending on the "tip" make visible the help needed.
+    if (tip === 'title') {        
+       titleTip.style.visibility = 'visible?';
+    }
+    if (tip === 'author') {        
+        authorTip.style.visibility = 'visible';
+    }
+    if (tip === 'pages') {        
+        pagesTip.style.visibility = 'visible';
+    }
+    if (tip === 'title author') {        
+        titleTip.style.visibility = 'visible';
+        authorTip.style.visibility = 'visible';
+    }
+}
+
+const hideToolTips = () => {
+    titleTip.style.visibility = 'hidden';
+    authorTip.style.visibility = 'hidden';
+    pagesTip.style.visibility = 'hidden';
+}
 
 
 // capitalize all words and insert commas as needed.
