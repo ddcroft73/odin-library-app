@@ -69,7 +69,7 @@ function buildSampleData() {
     }
 }
 
-// removes the sample data(only sample data) from the DOM and from localStorage
+// removes the sample data (only sample data) from the DOM and from localStorage.
 function removeSampleData() {
     for(let i = 0; i < 7; i++) {
         library.deleteBook(sampleBooks.books[i].bookID);

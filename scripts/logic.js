@@ -5,7 +5,7 @@
  * to an array. The use should be able to delete the books and when added they should be displayed in a table or
  * via "cards".
  * 
- * I added localStorage support so it could be used. But it never will. I used 2 differnt OOD design patterns for this
+ * I added localStorage support so it could actuallye be used... hehe. I used 2 differnt OOD design patterns for this
  * project. A factory fucntion pattern to create the books, and a module patern to create the library the books are 
  * kept in.
  */
@@ -30,8 +30,8 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             //the div it goes above
             const card_add = document.querySelector('.add-card');
 
-            // element, class[], insertBefoe, append, textContnet, ID, type
-            // create a new div for a card give it a class name and set data-index. 
+            // create a new div for a card give it a class name and set data-index as to 
+            // isolate the book data 
             const main_div = document.createElement('div');
             main_div.classList.add('nadd-card');
             main_div.setAttribute('data-index', this.bookID);
@@ -43,7 +43,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             title.textContent = this.title;
             main_div.appendChild(title);
 
-            // add the div for the Title and add the title Info
+            // add the div author and Info
             const author = document.createElement('div');
             author.classList.add('author');
             //author.textContent = `By: ${this.author}`;
@@ -55,13 +55,13 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             rule.classList.add('rule');
             main_div.appendChild(rule);
         
-            // add the div for the Title and add the title Info
+            // add the div for the number of pages 
             const pages = document.createElement('div');
             pages.classList.add('pages');
             pages.innerHTML = `Total Pages: <span class="special">${this.num_pages}</span>`;
             main_div.appendChild(pages);
 
-            // add the div for the Title and add the title Info
+            // add the div for the genre
             const genre = document.createElement('div');
             genre.classList.add('genre');
             genre.innerHTML = `Genre: <span class="special">${this.genre}</span>`;
@@ -82,7 +82,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             label.classList.add('switch');
             book_read.appendChild(label);
 
-            // put a checkbox inside the switch label
+            // put a checkbox inside the switch label that will be styled into a "toggle"
             const checkbox = document.createElement('input');
             checkbox.type = `checkbox`;
             checkbox.id = `read` + this.bookID; // add ID
@@ -98,7 +98,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             // inside card-footer.
             const read_status = document.createElement('div');
             read_status.classList.add('status' + this.bookID); // add ID
-            read_status.style = 'padding-left: 5px; color: gray;'
+            read_status.style = 'padding-left: 5px; color: gray;' // must be styled dynamically
             read_status.textContent = `Not Read`;
             book_read.appendChild(read_status);
 
@@ -119,12 +119,11 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             this.bindEvent_clickOnRead(this.bookID);
             // addevent and actions for the Delete Icon.
             this.bindEvent_clickOnDelete(this.bookID);
-            // display the status of the book as per the users input.
+            // change the status of the book if needed.
             this.toggleRead(this.read, this.bookID);
         },
 
         toggleRead(status, bookID) {
-            console.log(`book is ${status}`);
             document.querySelector('#read'+bookID).checked = status;
             const status_text = document.querySelector('.status'+bookID);
             if (status) {
@@ -134,7 +133,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             }
         },
 
-        // dynamically create events for each book created.
+        // dynamically create events that correspnd with a books read property.
         bindEvent_clickOnRead(bookID){  
             const read_checkbox = document.querySelector('#read'+bookID);
             const status_text = document.querySelector('.status'+bookID);
@@ -150,7 +149,7 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
             });
         },
 
-        // handles any clicks on the Delete icon... again for each book and card
+        // handles any clicks on the Delete icon... for each book card created
         bindEvent_clickOnDelete(bookID){
             const deleteIconContainer = document.querySelector('#delete'+bookID);
             deleteIconContainer.addEventListener('click', () => {
@@ -164,46 +163,47 @@ const createBook = ( {title, author, num_pages, genre, read, bookID}) => {
 // Module design pattern to create the Library Object. This function fires when the script is
 // loaded and creates the library object which handles the books.
 let library = (() =>  {
+    // these variables are accessed iside this function by all other functions. 
+    // considered just passing them around for an extra layer of encapsultion, but seems to be ok.
+    let book;              
+    let userInput;              // object to hold input fron the user after validation.
+    let bookStorage = []; 
+    let bookIDsInStorage = [];
     
-    let _book;            // individual book object  
-    let _userInput;       // object to hold input from user
-    let _bookStorage = []; 
-    let _bookIDsInStorage = [];
-    
-    // get any books already saved.
+    // get any books already saved when the program starts.
     (() => {
-        _bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
-        _bookIDsInStorage = fetchBookIds();
-        _bookStorage.forEach(loadBook);
+        bookStorage = localStorage.getItem('books') ? JSON.parse(localStorage.getItem("books")) : [];
+        bookIDsInStorage = fetchBookIds();
+        bookStorage.forEach(loadBook);
     })();
  
     // load the books in storage one by one.
     function loadBook(item){
-       _book = createBook(item);
-       _book.generateBookCard();
+       book = createBook(item);
+       book.generateBookCard();
     };
  
-    // gets all the IDs of the previuosly saved books so that a comparison is made when
+    // gets all the IDs of the previuosly saved books so that a comparison can be made when
     // creating a unique ID 
     function fetchBookIds()  {
          let returnArray = [];
-         for (let i = 0; i < _bookStorage.length; i++) {
-             returnArray.push(_bookStorage[i].bookID);
+         for (let i = 0; i < bookStorage.length; i++) {
+             returnArray.push(bookStorage[i].bookID);
          }
          return returnArray;
     };
  
     // save this book to locaStorage
     const saveBookToStorage = (book) => {    
-         _bookStorage.push(book);
-         localStorage.setItem('books', JSON.stringify(_bookStorage));
+         bookStorage.push(book);
+         localStorage.setItem('books', JSON.stringify(bookStorage));
     }
     
     const deleteBookFromStorage = (bookID) => {   
-         // get the element by data Index
          let container = document.querySelector('.main-container');
          let all_cards = document.querySelectorAll('.nadd-card');
          let index = null;         
+
          // remove book from DOM
          for (let i = 0; i < all_cards.length; i++) {
              index = all_cards[i].getAttribute('data-index');
@@ -212,21 +212,23 @@ let library = (() =>  {
              }
          }             
          // remove from storage
-         const bookIndex = getBook(_bookStorage, bookID);
+         const bookIndex = getBook(bookStorage, bookID);
+
          if (bookIndex != -1) {
             console.log(index + ' ' + bookID);
-            _bookStorage.splice(bookIndex, 1);
-            localStorage.setItem('books', JSON.stringify(_bookStorage));
+            bookStorage.splice(bookIndex, 1);
+            localStorage.setItem('books', JSON.stringify(bookStorage));
             console.log(`Book ID ${bookID} has been removed from DOM and localStorage.`);
          }
      }
      
+    //change the read property and save the data
     const updateBookInStorage = (bookID, read) => {    
-        const bookIndex = getBook(_bookStorage, bookID);
-        //change the read property and save the data
+        const bookIndex = getBook(bookStorage, bookID);
+
         if (bookIndex != -1) {
-            _bookStorage[bookIndex].read = read;
-            localStorage.setItem('books', JSON.stringify(_bookStorage));
+            bookStorage[bookIndex].read = read;
+            localStorage.setItem('books', JSON.stringify(bookStorage));
         }    
      } 
     
@@ -240,22 +242,22 @@ let library = (() =>  {
         return -1;
     }
 
-    // expose the methods to manipulate a book.
+    // expose these methods to manipulate a book.
     return { 
          newBook: (sample, bookInfo) => {            
             if(!sample) {
-                _userInput = validInput(_bookIDsInStorage);
-                if (_userInput) {
-                    // fire the factory to make the book
-                    _book = createBook(_userInput);
-                    _book.generateBookCard();   
-                    saveBookToStorage(_book);               
+                userInput = validInput(bookIDsInStorage);
+                if (userInput) {
+                    // fire the factory function to make the book
+                    book = createBook(userInput);
+                    book.generateBookCard();   
+                    saveBookToStorage(book);               
                 }
             } else {
                 // sample book data
-                _book = createBook(bookInfo);
-                _book.generateBookCard(); 
-                saveBookToStorage(_book); 
+                book = createBook(bookInfo);
+                book.generateBookCard(); 
+                saveBookToStorage(book); 
             }   
          },
   
@@ -268,11 +270,18 @@ let library = (() =>  {
          },
 
          deleteAll: () => {
-             console.log('deleting all books.');
              removeSampleData();
          }
     };
  })();
+
+
+/*  Utility functions - 
+ *  Wasn't sure if it was correct OOD if i did not make these a part of the object.
+ *  I could have created a utility object created by the library object, or made them a part of the library
+ *  object. AS it is I just left them as fucntions to be used as needed.
+ */ 
+
 
 const validInput = (currIds) => {  
     const title = document.getElementById('title').value;
@@ -308,16 +317,13 @@ const validInput = (currIds) => {
    return userInput;    
 }
 
-// creates a unique book ID witha random # 1-300. 
+// creates a unique book ID with a random # 1-300. 
 const createUniqueID = (currBookIds) => {    
     let idExists = true;
     let newID = null;
 
     while (idExists) {
-        // generate anew ID # between 1 and 300
         newID = Math.floor(Math.random() * 300) + 1; 
-        // is it in use?
-
         if (currBookIds.indexOf(newID) == -1) {
           idExists = false;
         }
@@ -327,6 +333,7 @@ const createUniqueID = (currBookIds) => {
 
 // resets all the fields after a submission. I did not use 'submit' with this because
 // the form is for nothing but userinput. Nothing to submit. No backend to process the input.
+
 const resetModalFields = (userReset) => {
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
@@ -362,7 +369,6 @@ const hideToolTips = () => {
     authorTip.style.visibility = 'hidden';
     pagesTip.style.visibility = 'hidden';
 }
-
 
 // capitalize all words and insert commas as needed.
 const formatInput = (input) => {

@@ -22,6 +22,8 @@ pagesBox.addEventListener('keydown', () => {
     pagesTip.style.visibility = 'hidden';
 });
 
+
+
 //Save Book Event 
 const save_book = document.querySelector('#save');
 save_book.addEventListener('click', () => {
@@ -43,7 +45,7 @@ resetButton.addEventListener('click', () => {
  });
 
 
-// toggle for read slider on the addbook modal
+// toggle for "read" switch on the addbook modal
 const modal_read_checkbox = document.querySelector('#modal-read');
 const modal_status_text = document.querySelector('.modal-status');
 
@@ -75,6 +77,7 @@ window.addEventListener('click', (event) =>{
     }
 });    
 
+// modal reset button
 resetBtn.addEventListener('click', () => resetModalFields(true));
 
 
