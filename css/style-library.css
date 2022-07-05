@@ -301,6 +301,8 @@ a {
     }
 .nadd-card:active {    
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+    
+    border: 0px dotted aliceblue;
 }
 .title {
     border: 1px solid gray;
